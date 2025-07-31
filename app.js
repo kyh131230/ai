@@ -18,7 +18,7 @@ async function startCamera(facingMode) {
     // 카메라 접근을 요청 (video: true면 기본 카메라, facingMode로 방향 설정)
     stream = await navigator.mediaDevices.getUserMedia({
       video: {
-        facingMode: { exact: facingMode }  // 'environment' → 후면, 'user' → 전면
+        facingMode: facingMode  // 'environment' → 후면, 'user' → 전면
       },
       audio: false                         // 오디오는 필요 없으므로 비활성화
     });
