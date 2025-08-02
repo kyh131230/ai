@@ -19,10 +19,16 @@ async function initCamera() {
       audio: false
     });
     video.srcObject = stream;
-    await video.play();
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    log("✅ 카메라 시작됨");
+
+    return new Promise((resolve) => {
+      video.onloadedmetadata = () => {
+        video.play();
+        canvas.width = video.videoWidth || 320;
+        canvas.height = video.videoHeight || 240;
+        log("✅ 카메라 시작됨");
+        resolve();
+      };
+    });
   } catch (err) {
     log("❌ 카메라 접근 오류: " + err.message, 'red');
   }
@@ -63,7 +69,15 @@ document.getElementById('captureBtn').addEventListener('click', async () => {
     return;
   }
 
+  // 1️⃣ 실제 영상 프레임 캡처 확인용 로그
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const avgR = imgData.data[0]; // 첫 픽셀의 R값
+  if (avgR < 5 && imgData.data[1] < 5 && imgData.data[2] < 5) {
+    log("⚠️ 영상 프레임이 비어있을 수 있습니다", 'orange');
+    return;
+  }
+
   try {
     const input = preprocess();
     const outputMap = await modelSession.run({ images: input });
