@@ -79,6 +79,12 @@ document.getElementById('captureBtn').addEventListener('click', async () => {
   }
 
   // 1️⃣ 실제 영상 프레임 캡처 확인용 로그
+  console.log("📸 video.readyState =", video.readyState);  // 0 ~ 4
+  console.log("🎞️ video.videoWidth =", video.videoWidth);
+  if (video.readyState < 2) {
+  log("⚠️ 비디오 프레임이 아직 준비되지 않았습니다", 'orange');
+  return;
+  }
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
 // 디버깅용: 첫 번째 픽셀이 전부 255라면 흰색임
