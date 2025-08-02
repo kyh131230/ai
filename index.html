@@ -1,18 +1,35 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PPE Detector</title>
-  <link rel="manifest" href="manifest.json" />
+  <title>YOLOv8n Object Detection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ONNX Runtime Web -->
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+    }
+    video, canvas {
+      max-width: 100%;
+      height: auto;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-  <h2>PPE Detector - Camera Test</h2>
-  <video id="video" width="300" autoplay playsinline></video><br>
-  <button id="capture">📸 촬영 후 분석</button>
-  <button id="switch">🔄 카메라 전환</button>
-  <canvas id="canvas" width="300" height="225" style="display:none;"></canvas>
+  <h2>YOLOv8n Object Detection</h2>
+
+  <video id="video" autoplay playsinline></video><br/>
+  <button id="captureBtn">📸 분석</button><br/>
+  <canvas id="canvas"></canvas>
+
+  <!-- YOLOv8 처리 스크립트 -->
   <script src="app.js"></script>
 </body>
 </html>
