@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>YOLOv8 Object Detection</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <title>YOLOv8n Object Detection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
   <style>
-    canvas { border: 1px solid #ccc; }
+    body { font-family: sans-serif; text-align: center; margin-top: 20px; }
+    canvas { border: 1px solid black; }
     #status { margin-top: 10px; font-weight: bold; }
   </style>
 </head>
 <body>
   <h2>YOLOv8n Object Detection</h2>
-  <video id="video" autoplay playsinline width="320"></video><br/>
+  <video id="video" autoplay playsinline width="320" height="240"></video><br>
   <button id="captureBtn">📸 분석</button>
   <canvas id="canvas" width="320" height="240"></canvas>
-  <div id="status">🕒 준비 중...</div>
+  <p id="status">🔄 초기화 중...</p>
 
-  <!-- 순서 중요! 먼저 postprocess.js, 그다음 app.js -->
+  <!-- 스크립트 -->
   <script src="postprocess.js"></script>
   <script src="app.js"></script>
 </body>

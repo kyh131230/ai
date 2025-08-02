@@ -12,7 +12,6 @@ function log(msg, color = 'green') {
   status.style.color = color;
 }
 
-// 📸 카메라 시작
 async function initCamera() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -21,7 +20,6 @@ async function initCamera() {
     });
     video.srcObject = stream;
     await video.play();
-
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     log("✅ 카메라 시작됨");
@@ -30,7 +28,6 @@ async function initCamera() {
   }
 }
 
-// 🤖 모델 로딩
 async function loadModel() {
   try {
     log("🔄 모델 로딩 중...");
@@ -41,14 +38,12 @@ async function loadModel() {
   }
 }
 
-// 🧠 전처리
 function preprocess() {
   const tempCanvas = document.createElement('canvas');
   tempCanvas.width = modelInputSize;
   tempCanvas.height = modelInputSize;
   const tempCtx = tempCanvas.getContext('2d');
   tempCtx.drawImage(video, 0, 0, modelInputSize, modelInputSize);
-
   const imageData = tempCtx.getImageData(0, 0, modelInputSize, modelInputSize);
   const { data } = imageData;
 
@@ -62,9 +57,6 @@ function preprocess() {
   return new ort.Tensor('float32', floatData, [1, 3, modelInputSize, modelInputSize]);
 }
 
-// 📦 후처리 (생략 가능. 앞서 작성한 postprocess, drawBoxes 함수 사용)
-
-// 📸 버튼 클릭 → 분석 실행
 document.getElementById('captureBtn').addEventListener('click', async () => {
   if (!modelSession) {
     log("❌ 모델이 아직 로드되지 않았습니다", 'red');
@@ -83,7 +75,6 @@ document.getElementById('captureBtn').addEventListener('click', async () => {
   }
 });
 
-// ✅ 전체 초기화
 window.onload = async () => {
   await initCamera();
   await loadModel();
