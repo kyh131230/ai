@@ -14,32 +14,28 @@ const classNames = [
 ];
 
 function drawBoxes(output, ctx, canvasWidth, canvasHeight) {
-  const numDetections = output.length / 85;
+  const numDetections = output.length / 6;
 
   for (let i = 0; i < numDetections; i++) {
-    const base = i * 85;
-    const scores = output.slice(base + 5, base + 85);
-    const maxScore = Math.max(...scores);
-    const classId = scores.indexOf(maxScore);
+    const x1 = output[i * 6];
+    const y1 = output[i * 6 + 1];
+    const x2 = output[i * 6 + 2];
+    const y2 = output[i * 6 + 3];
+    const score = output[i * 6 + 4];
+    const classId = output[i * 6 + 5];
 
-    if (maxScore > 0.5) {
-      const cx = output[base];
-      const cy = output[base + 1];
-      const w = output[base + 2];
-      const h = output[base + 3];
-
-      const x = (cx - w / 2) * canvasWidth / modelInputSize;
-      const y = (cy - h / 2) * canvasHeight / modelInputSize;
-      const width = w * canvasWidth / modelInputSize;
-      const height = h * canvasHeight / modelInputSize;
+    if (score > 0.4) {  // 원하는 confidence threshold
+      const boxWidth = x2 - x1;
+      const boxHeight = y2 - y1;
 
       ctx.strokeStyle = "red";
       ctx.lineWidth = 2;
-      ctx.strokeRect(x, y, width, height);
+      ctx.strokeRect(x1, y1, boxWidth, boxHeight);
 
       ctx.font = "16px sans-serif";
       ctx.fillStyle = "red";
-      ctx.fillText(`${classNames[classId]} (${maxScore.toFixed(2)})`, x, y > 10 ? y - 5 : y + 15);
+      const label = classNames[Math.floor(classId)] || `class ${classId}`;
+      ctx.fillText(`${label} (${score.toFixed(2)})`, x1, y1 > 10 ? y1 - 5 : y1 + 15);
     }
   }
 }
