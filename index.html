@@ -2,18 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>YOLOv8n Static Image Detection</title>
+  <title>YOLOv8n Object Detection (Camera)</title>
   <style>
-    body { margin: 0; text-align: center; background: #000; color: white; }
-    canvas { display: block; margin: auto; }
-    #status { margin: 1rem 0; }
+    body {
+      margin: 0;
+      text-align: center;
+      background: #000;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    video, canvas {
+      display: block;
+      margin: auto;
+    }
+
+    #status {
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
-  <h2>YOLOv8n Static Image Detection</h2>
-  <button onclick="runInference()">🧠 분석 시작</button>
-  <div id="status">모델을 불러오는 중...</div>
+  <h2>YOLOv8n Object Detection (📱 Mobile Camera)</h2>
+  <video id="video" autoplay playsinline width="640" height="640"></video>
   <canvas id="canvas" width="640" height="640"></canvas>
+  <div id="status">모델을 불러오는 중...</div>
 
   <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
   <script src="postprocess.js"></script>

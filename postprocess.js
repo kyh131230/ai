@@ -24,12 +24,10 @@ function drawBoxes(output, ctx, canvasWidth, canvasHeight) {
     const score = output[i * 6 + 4];
     const classId = output[i * 6 + 5];
 
-    // ✅ 감도 낮춤
     if (score > 0.2) {
       const boxWidth = x2 - x1;
       const boxHeight = y2 - y1;
 
-      // ✅ 캔버스 비율 보정 제거: 모델 출력 자체가 640 기준이므로 그대로 그리기
       ctx.strokeStyle = "red";
       ctx.lineWidth = 2;
       ctx.strokeRect(x1, y1, boxWidth, boxHeight);
