@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>YOLOv8n Object Detection</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+  <meta charset="UTF-8" />
+  <title>YOLOv8n ONNX Object Detection</title>
   <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 20px; }
-    canvas { border: 1px solid black; }
-    #status { margin-top: 10px; font-weight: bold; }
+    body { margin: 0; text-align: center; background: #000; color: white; }
+    canvas, video { display: block; margin: auto; }
+    #status { margin-top: 1rem; }
   </style>
 </head>
 <body>
-  <h2>YOLOv8n Object Detection</h2>
-  <video id="video" autoplay playsinline width="320" height="240"></video><br>
-  <button id="captureBtn">📸 분석</button>
-  <canvas id="canvas" width="320" height="240"></canvas>
-  <p id="status">🔄 초기화 중...</p>
+  <h2>YOLOv8n Object Detection (Mobile)</h2>
+  <video id="video" autoplay playsinline width="640" height="640"></video>
+  <canvas id="canvas" width="640" height="640"></canvas>
+  <div id="status">📡 모델 로딩 중...</div>
 
-  <!-- 스크립트 -->
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
   <script src="postprocess.js"></script>
   <script src="app.js"></script>
 </body>
