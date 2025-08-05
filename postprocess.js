@@ -22,7 +22,7 @@ function drawBoxes(output, ctx, canvasWidth, canvasHeight) {
     const maxScore = Math.max(...scores);
     const classId = scores.indexOf(maxScore);
 
-    if (maxScore > 0.5) {  // 신뢰도 필터
+    if (maxScore > 0.5) {
       const cx = output[base];
       const cy = output[base + 1];
       const w = output[base + 2];
