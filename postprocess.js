@@ -24,7 +24,7 @@ function drawBoxes(output, ctx, canvasWidth, canvasHeight) {
     const score = output[i * 6 + 4];
     const classId = output[i * 6 + 5];
 
-    if (score > 0.2) {
+    if (score > 0.7) {
       const boxWidth = x2 - x1;
       const boxHeight = y2 - y1;
 
