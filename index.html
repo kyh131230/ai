@@ -2,31 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>YOLOv8n Object Detection (Camera)</title>
+  <title>YOLOv8n - 촬영 후 객체 인식</title>
   <style>
     body {
       margin: 0;
-      text-align: center;
       background: #000;
       color: white;
+      text-align: center;
       font-family: sans-serif;
     }
-
     video, canvas {
       display: block;
       margin: auto;
     }
-
-    #status {
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      z-index: 999;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
       margin-top: 1rem;
+      background-color: #ffffff;
+      color: #000000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: gray;
+      color: #666;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
-  <h2>YOLOv8n Object Detection (📱 Mobile Camera)</h2>
+  <div id="overlay">모델을 불러오는 중입니다...</div>
+
+  <h2>YOLOv8n - 사진 촬영 후 객체 인식</h2>
   <video id="video" autoplay playsinline width="640" height="640"></video>
   <canvas id="canvas" width="640" height="640"></canvas>
-  <div id="status">모델을 불러오는 중...</div>
+  <button id="analyzeBtn" disabled>📸 분석</button>
 
   <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
   <script src="postprocess.js"></script>
