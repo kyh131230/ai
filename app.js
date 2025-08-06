@@ -5,7 +5,7 @@ const overlay = document.getElementById("overlay");
 const analyzeBtn = document.getElementById("analyzeBtn");
 
 const modelInputSize = 640;
-const modelPath = "./model/yolov8n.onnx";
+const modelPath = "./model/yolo8n_sh17.onnx";
 
 let session = null;
 
